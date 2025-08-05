@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火狮桃星 - 官方信息</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/ico.png">
+    <style>
+        :root {
+            --primary: #00fbffd6;
+            --secondary: #02e2f2d0;
+            --dark: #0f2027;
+            --darker: #0a161c;
+            --light: #f0f0f0;
+            --gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            --gradient-hover: linear-gradient(135deg, #1a3945, #2c4f5e, #3a6a7f);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--gradient);
+            color: var(--light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 126, 179, 0.1) 0%, rgba(0, 198, 255, 0.05) 90%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 粒子背景 */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 70%;
+        }
+
+        /* 头部区域 */
+        header {
+            padding: 120px 20px 80px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(15, 32, 39, 0.9), rgba(15, 32, 39, 0.3));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: rgba(240, 240, 240, 0.9);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 198, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 198, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* 主要内容区域 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 198, 255, 0.25);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 198, 255, 0.3);
+            font-size: 2rem;
+        }
+
+        .section-icon {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            color: rgba(240, 240, 240, 0.9);
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.15rem;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+        }
+
+        /* 项目展示 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(10, 22, 28, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(0, 198, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            background: rgba(15, 32, 39, 0.8);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 198, 255, 0.2);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .project-desc {
+            font-size: 1rem;
+            color: rgba(240, 240, 240, 0.7);
+        }
+
+        /* 联系表单 */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 198, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: var(--darker);
+            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .contact-form {
+            background: rgba(10, 22, 28, 0.7);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 198, 255, 0.3);
+            background: rgba(15, 32, 39, 0.5);
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2);
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1rem;
+            color: rgba(240, 240, 240, 0.7);
+            border-top: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(240, 240, 240, 0.5);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 粒子背景 -->
+    <div id="particles-js"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>火狮桃星</span>
+            </a>
+            <div class="nav-links">
+                <a href="#intro">简介</a>
+                <a href="#meaning">名字含义</a>
+                <a href="#projects">项目</a>
+                <a href="#interests">兴趣</a>
+                <a href="#vision">愿景</a>
+                <a href="#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部区域 -->
+    <header>
+        <div class="header-content">
+            <h1 class="title floating">火狮桃星 · 了解更多</h1>
+            <p class="subtitle">技术创新工程师 · 网页开发 · 数字艺术创作者</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">探索项目</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 简介部分 -->
+        <section id="intro" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-user section-icon"></i>
+                简介
+            </h2>
+            <p><span class="highlight">火狮桃星</span> 是一个充满热情与创造力的技术创新工程师，专注于网页开发、数字创意与多媒体表达。他的名字象征着热烈、力量与宇宙的幻想。</p>
+            <p>他以独特的审美与精湛的代码能力，将创意变为现实，打造出多个具有沉浸感与艺术氛围的数字作品。</p>
+        </section>
+
+        <!-- 名字含义部分 -->
+        <section id="meaning" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-signature section-icon"></i>
+                名字含义
+            </h2>
+            <p>
+                「<span class="highlight">火狮</span>」代表着燃烧不息的热情与狮子座的王者之气，象征创新与领导力；<br>
+                「<span class="highlight">桃星</span>」来源于对《原神》角色胡桃的深爱，以及对宇宙星辰的探索与幻想。
+            </p>
+            <div style="display: flex; justify-content: center; margin-top: 30px;">
+                <div
+                    style="background: rgba(0,198,255,0.1); padding: 25px; border-radius: 15px; max-width: 500px; text-align: center;">
+                    <i class="fas fa-star" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <p style="font-style: italic;">"胡桃是心中永远的第一，完美无瑕的灵感源泉"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技术栈与项目部分 -->
+        <section id="projects" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-code section-icon"></i>
+                技术栈与项目
+            </h2>
+            <p>精通多种技术栈，开发了多个创意型与实用型项目：</p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <i class="fas fa-laptop-code project-icon"></i>
+                    <h3 class="project-title">全栈开发</h3>
+                    <p class="project-desc">HTML/CSS/JavaScript 全栈开发，创造响应式现代网页应用</p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fab fa-python project-icon"></i>
+                    <h3 class="project-title">Python应用</h3>
+                    <p class="project-desc">开发实用工具如打包器、清理工具，提高开发效率</p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fab fa-android project-icon"></i>
+                    <h3 class="project-title">Android应用</h3>
+                    <p class="project-desc">使用Kotlin开发功能丰富的Android应用，目前还在开发中</p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fas fa-user-secret project-icon"></i>
+                    <h3 class="project-title">暗网开发</h3>
+                    <p class="project-desc">Tor 暗网网站开发，支持注册、评论、图文 等。onion</p>
+                </div>
+
+                <div class="project-card">
+                    <i class="fas fa-music project-icon"></i>
+                    <h3 class="project-title">桃星音乐</h3>
+                    <p class="project-desc">音乐疗愈网站，支持雨声、动态背景、视觉音频等沉浸体验</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 兴趣与灵感部分 -->
+        <section id="interests" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-heart section-icon"></i>
+                兴趣与灵感
+            </h2>
+            <p>深受《原神》中角色「胡桃」启发，认为她是心中永远的第一，完美无瑕。</p>
+            <p>兴趣还包括自然探索、声音疗愈、旅行、摄影、动漫视觉体验等。</p>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 30px;">
+                <div
+                    style="flex: 1; min-width: 200px; background: rgba(0,198,255,0.1); padding: 20px; border-radius: 12px;">
+                    <i class="fas fa-tree" style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--light); margin-bottom: 10px;">自然探索</h3>
+                    <p>从大自然中汲取灵感，感受生命的力量</p>
+                </div>
+
+                <div
+                    style="flex: 1; min-width: 200px; background: rgba(0,198,255,0.1); padding: 20px; border-radius: 12px;">
+                    <i class="fas fa-headphones"
+                        style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--light); margin-bottom: 10px;">声音疗愈</h3>
+                    <p>通过声音创造沉浸式疗愈体验</p>
+                </div>
+
+                <div
+                    style="flex: 1; min-width: 200px; background: rgba(0,198,255,0.1); padding: 20px; border-radius: 12px;">
+                    <i class="fas fa-camera" style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--light); margin-bottom: 10px;">摄影艺术</h3>
+                    <p>用镜头捕捉世界的美丽瞬间</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 未来愿景部分 -->
+        <section id="vision" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-rocket section-icon"></i>
+                未来愿景
+            </h2>
+            <p>
+                火狮桃星致力于打造融合创意与技术的世界，未来将继续开发更多沉浸感强烈、富有幻想色彩的数字项目，分享温暖、疗愈与灵感。
+            </p>
+
+            <div
+                style="margin-top: 30px; background: rgba(255,126,179,0.1); padding: 25px; border-radius: 15px; border-left: 4px solid var(--secondary);">
+                <h3 style="color: var(--light); margin-bottom: 15px;">核心目标：</h3>
+                <ul>
+                    <li>打造具有情感共鸣的互动作品</li>
+                    <li>开发沉浸式数字艺术体验</li>
+                    <li>构建疗愈与幻想并存的创作平台</li>
+                    <li>探索宇宙主题的互动项目</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 联系部分 -->
+        <section id="contact" class="section">
+            <h2 class="section-title">
+                <i class="fas fa-envelope section-icon"></i>
+                联系与更多
+            </h2>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>更多内容即将上线，敬请期待...</p>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <h3>火狮桃星 官网</h3>
+                            <a href="https://huoshi-taoxing.github.io" target="_blank"
+                                style="text-decoration: none; color: rgba(0, 229, 255, 0.784);">https://huoshi-taoxing.github.io</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>电子邮件</h3>
+                            <p>huoshi.h.s.t@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div>
+                            <h3>社交媒体</h3>
+                            <div class="social-links">
+                                <a href="https://www.github.com" class="social-link"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-x-twitter">𝕏</i></a>
+                                <a href="https://www.youtube.com/@HuTao_Hu" class="social-link"><i
+                                        class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 style="color: var(--light); margin-bottom: 20px;">发送消息 (维护中 目前无法使用)</h3>
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" placeholder="您的姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" placeholder="您的邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">消息</label>
+                        <textarea id="message" rows="5" placeholder="您想说的话..."></textarea>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%;">发送消息</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+火狮桃星
+            </div>
+            <p>致力于创造融合技术与艺术的数字体验</p>
+            <div class="social-links" style="justify-content: center; margin-top: 25px;">
+                <a href="https://www.github.com" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-x-twitter">𝕏</i></a>
+                <a href="https://www.youtube.com/@HuTao_Hu" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 火狮桃星 · HUOSHI Tao Star · All Rights Reserved - Reservado todos los derechos.</p>
+        </div>
+    </footer>
+
+    <!-- 粒子背景脚本 -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 初始化粒子背景
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00c6ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00c6ff",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out"
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 滚动动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // 为每个部分添加初始样式和观察
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = 0;
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+
+</html>
