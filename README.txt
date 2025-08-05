@@ -1,30 +1,18 @@
-Dimension by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+火狮桃星 的 Dimension 主题  
+基于 HTML5 UP 制作  
+html5up.net | @ajlkn  
+根据 CCA 3.0 协议免费用于个人与商业用途（html5up.net/license）
 
+这是火狮桃星定制版的 Dimension，一个轻盈、现代、具有深度视觉效果的单页网站模板。  
+点击左侧菜单可切换页面，所有内容采用模态窗口展现，支持多设备自适应。  
+整体设计以梦幻、治愈与个性风格为主，适用于展示作品、项目或个人介绍等场景。  
 
-This is Dimension, a fun little one-pager with modal-ized (is that a word?) "pages"
-and a cool depth effect (click on a menu item to see what I mean). Simple, fully
-responsive, and kitted out with all the usual pre-styled elements you'd expect.
-Hope you dig it :)
+本模板在原版基础上加入了火狮桃星的特色内容与风格优化。  
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+示例图片*来源于 Unsplash，一个提供高质量、可自由使用图片的网站。
 
-(* = not included)
+(* = 示例图未包含在模板中)
 
-AJ
-aj@lkn.io | @ajlkn
+火狮桃星 | HUOSHI TAOXING  
 
-
-Credits:
-
-	Demo Images:
-		Unsplash (unsplash.com)
-
-	Icons:
-		Font Awesome (fontawesome.io)
-
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+---
