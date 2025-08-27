@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桃星音乐 介绍页面</title>
+    <link href="taostar-styles.css" rel="stylesheet">
+    <!--
+
+火狮桃星 HUOSHI
+
+-->
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <a href="#home" class="logo-container">
+            <div class="logo">
+                <?xml version="1.0" encoding="utf-8"?>
+                <!-- License: PD. Made by Mary Akveo: https://maryakveo.com/ -->
+                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="music" data-name="Line Color"
+                    xmlns="http://www.w3.org/2000/svg" class="icon line-color">
+                    <path id="secondary" d="M15,8H12v6"
+                        style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                    </path>
+                    <circle id="secondary-2" data-name="secondary" cx="10" cy="14" r="2"
+                        style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                    </circle>
+                    <circle id="primary" cx="12" cy="12" r="9"
+                        style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                    </circle>
+                </svg>
+            </div>
+            <div class="logo-text">桃星音乐</div>
+        </a>
+
+        <nav class="main-menu" id="mainMenu">
+            <a href="#home" class="menu-item active">主页面</a>
+            <a href="#about" class="menu-item">关于</a>
+            <a href="#contact" class="menu-item">联系</a>
+            <a href="https://huoshi-taoxing.github.io/" target="_blank" rel="noopener noreferrer" class="menu-item external">火狮桃星</a>
+        </nav>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="coverflow-wrapper">
+            <div class="info">
+                <h2 id="current-title">桃星音乐</h2>
+                <p id="current-description">风景壁纸欣赏</p>
+            </div>
+
+            <div class="coverflow-container" tabindex="0">
+                <div class="coverflow" id="coverflow">
+                    <div class="coverflow-item" data-index="0">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-1.png" alt="IMG 1 TaoStar" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="1">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-2.png" alt="IMG 2 TaoStar" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="2">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-3.png" alt="IMG 3 TaoStar" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="3">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-4.png" alt="IMG 4 TaoStar" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="4">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-5.png" alt="IMG 5 TaoStar" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="5">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-6.png" alt="Starry Night" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                    <div class="coverflow-item" data-index="6">
+                        <div class="cover image-loading">
+                            <img src="images/taostar-music-7.png" alt="Waterfall" loading="lazy">
+                        </div>
+                        <div class="reflection"></div>
+                    </div>
+                </div>
+
+                <button class="nav-button prev" onclick="navigate(-1)">‹</button>
+                <button class="nav-button next" onclick="navigate(1)">›</button>
+
+                <div class="dots-container" id="dots"></div>
+
+                <!-- Play/Pause Button -->
+                <button class="play-pause-button" id="playPauseBtn" onclick="toggleAutoplay()">
+                    <span class="play-icon">▶</span>
+                    <span class="pause-icon" style="display: none;">❚❚</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-content">
+            <div class="about-header">
+                <h2>桃星音乐 <br> Tao Star Music </h2>
+                <p>治愈助眠音乐软件</p>
+            </div>
+
+            <div class="about-main">
+                <div class="about-visual">
+                    <div class="showcase-display">
+                        <div class="showcase-main">
+                            <div class="corner-decoration top-left"></div>
+                            <div class="corner-decoration bottom-right"></div>
+
+                            <div class="showcase-logo">
+                                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="music"
+                                    data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color">
+                                    <path id="secondary" d="M15,8H12v6"
+                                        style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                                    </path>
+                                    <circle id="secondary-2" data-name="secondary" cx="10" cy="14" r="2"
+                                        style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                                    </circle>
+                                    <circle id="primary" cx="12" cy="12" r="9"
+                                        style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                                    </circle>
+                                </svg>
+                            </div>
+
+                            <h3 class="showcase-title">火狮桃星</h3>
+                            <p class="showcase-subtitle">
+                            </p>
+
+                            <div class="showcase-badges">
+                                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer"
+                                    class="badge">Python</a>
+                                <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+                                    class="badge">GitHub</a>
+                                <a href="https://huoshi-taoxing.github.io/" target="_blank" rel="noopener noreferrer"
+                                    class="badge">HUOSHI</a>
+                                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer"
+                                    class="badge">React</a>
+                                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer"
+                                    class="badge">Node.js</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-info">
+                    <h3>探索治愈音乐与音频波的奥秘</h3>
+                    <p>声音是一种能量波，不同频率的音频会与我们的身体和大脑产生共振。科学研究表明，特定频率的声波可以影响情绪、睡眠、专注力，甚至有助于身心的自我修复。</p>
+                    <p>治愈音乐利用特定的音频波原理，通过声波与脑电波的交互，帮助人们放松、减压、提升身心平衡。432Hz、528Hz 等常见治愈频率被广泛应用于冥想、睡眠与疗愈音乐的创作中。</p>
+
+                    <ul class="feature-list">
+                        <li>了解声音频率与大脑脑电波之间的科学关系</li>
+                        <li>探索 432Hz、528Hz 等常用治愈音乐频率</li>
+                        <li>解析不同声波对情绪、睡眠、专注力的影响</li>
+                        <li>认识双声拍（Binaural Beats）与冥想音乐原理</li>
+                        <li>结合科学与音波技术，深入理解声音疗愈机制</li>
+                    </ul>
+
+                    <a href="https://huoshi-taoxing.github.io/taoxing-music/taoxing-music-web/" class="cta-button">
+                        访问桃星音乐
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">探索未知的勇气</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">⬆</div>
+                    <div class="stat-label">持续创新与突破</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">★</div>
+                    <div class="stat-label">研究与探索未知</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">科技发明创造无限可能</div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="contact-content">
+            <div class="contact-header">
+                <h2>保持联系</h2>
+                <p>有任何想法或建议，欢迎随时与我们沟通。我们重视每一条反馈，并期待与您交流。</p>
+
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info-section">
+                    <h3>联系我们</h3>
+                    <p>我们欢迎您的意见与反馈，任何想法、建议或疑问都将得到认真倾听与回应。您的声音对我们持续改进和优化体验至关重要。</p>
+
+
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>huoshi.h.s.t@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg fill="#000000" width="800px" height="800px" viewBox="0 -32 576 576"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <title>web</title>
+                                    <path
+                                        d="M288 32Q350 32 402 63 453 93 483 145 512 196 512 256 512 318 482 370 451 421 400 451 348 480 288 480 226 480 175 450 123 419 94 368 64 316 64 256 64 194 95 143 125 91 177 62 228 32 288 32ZM272 83Q235 95 218 151 245 158 272 160L272 83ZM304 160Q331 158 358 151 341 95 304 83L304 160ZM367 98Q380 118 387 141 403 133 411 128 392 111 367 98ZM189 141Q197 117 209 98 185 110 166 129L189 141ZM463 240Q460 193 432 153 412 166 396 172 403 205 404 240L463 240ZM180 172Q165 166 145 153 118 191 113 240L172 240Q173 205 180 172ZM272 192Q238 189 210 182 205 208 204 240L272 240 272 192ZM372 240Q371 208 366 182 338 189 304 192L304 240 372 240ZM113 272Q118 321 145 359 159 349 180 340 173 307 172 272L113 272ZM204 272Q205 304 210 330 238 323 272 320L272 272 204 272ZM304 320Q338 323 366 330 371 304 372 272L304 272 304 320ZM396 340Q411 346 431 359 458 321 463 272L404 272Q403 307 396 340ZM304 429Q341 417 358 361 331 354 304 352L304 429ZM272 352Q245 354 218 361 235 417 272 429L272 352ZM189 371Q176 376 166 383 185 401 208 413 195 391 189 371ZM387 371Q380 394 367 413 390 403 410 383L387 371Z" />
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>主官网</h4>
+                                <p><a href="https://huoshi-taoxing.github.io/"
+                                        style="text-decoration: none; color: rgb(205, 205, 205);">
+                                        https://huoshi-taoxing.github.io/ </a></p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"
+                                    enable-background="new 0 0 32 32" xml:space="preserve">
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="12"
+                                        y1="16" x2="27" y2="16" />
+                                    <rect x="5" y="14" fill="none" stroke="#000000" stroke-width="2"
+                                        stroke-miterlimit="10" width="4" height="4" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="12"
+                                        y1="8" x2="27" y2="8" />
+                                    <rect x="5" y="6" fill="none" stroke="#000000" stroke-width="2"
+                                        stroke-miterlimit="10" width="4" height="4" />
+                                    <line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="12"
+                                        y1="24" x2="27" y2="24" />
+                                    <rect x="5" y="22" fill="none" stroke="#000000" stroke-width="2"
+                                        stroke-miterlimit="10" width="4" height="4" />
+                                </svg>
+                            </div>
+                            <div class="contact-text">
+                                <h4>更新日志 Change Log</h4>
+                                <p> 点击 >>> <b><a
+                                            href="https://huoshi-taoxing.github.io/taoxing-music/taoxing-music-web/update-list.htm?huoshi-taoxing=taoxing-music+update-list-changelog~huoshitaostar~bnry=01101000+01110100+00101101+01101000+01110011"
+                                            style="text-decoration: none; color: rgb(157, 157, 157);"> 更新日志</a> </p></b>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="social-links">
+                        <h4>订阅 支持</h4>
+                        <div class="social-buttons">
+                            <a href="https://www.douyin.com/user/MS4wLjABAAAACijCHXWkdAit63xNKQJqV1v_SikFaSv361RJzIktzAX15pBKLOT65qZe7-A-wpHX?from_tab_name=main" class="social-btn" title="Tik Tok 抖音">
+                                <svg width="512px" height="512px" viewBox="0 0 512 512" id="icons"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M412.19,118.66a109.27,109.27,0,0,1-9.45-5.5,132.87,132.87,0,0,1-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14,23.9,350,16,350.13,16H267.69V334.78c0,4.28,0,8.51-.18,12.69,0,.52-.05,1-.08,1.56,0,.23,0,.47-.05.71,0,.06,0,.12,0,.18a70,70,0,0,1-35.22,55.56,68.8,68.8,0,0,1-34.11,9c-38.41,0-69.54-31.32-69.54-70s31.13-70,69.54-70a68.9,68.9,0,0,1,21.41,3.39l.1-83.94a153.14,153.14,0,0,0-118,34.52,161.79,161.79,0,0,0-35.3,43.53c-3.48,6-16.61,30.11-18.2,69.24-1,22.21,5.67,45.22,8.85,54.73v.2c2,5.6,9.75,24.71,22.38,40.82A167.53,167.53,0,0,0,115,470.66v-.2l.2.2C155.11,497.78,199.36,496,199.36,496c7.66-.31,33.32,0,62.46-13.81,32.32-15.31,50.72-38.12,50.72-38.12a158.46,158.46,0,0,0,27.64-45.93c7.46-19.61,9.95-43.13,9.95-52.53V176.49c1,.6,14.32,9.41,14.32,9.41s19.19,12.3,49.13,20.31c21.48,5.7,50.42,6.9,50.42,6.9V131.27C453.86,132.37,433.27,129.17,412.19,118.66Z" />
+                                </svg>
+                            </a>
+                            <a href="#" class="social-btn" title="Twitter">
+                                <svg width="1200" height="1227" viewBox="0 0 1200 1227" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+                                        fill="white" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-copyright">
+                © 2025 火狮桃星. All rights reserved. 保留所有版权. Todos los derechos reservados. | 网页结构提供 <a
+                    href="https://templatemo.com" target="_blank" rel="noopener noreferrer">TemplateMo</a> | 本 网页代码 由 火狮桃星 重新修改设计。| 如需了解更多关于 火狮团队 火狮桃星 可点击 ><a
+                    href="https://huoshi-taoxing.github.io/huoshi-taostar.html" target="_blank" rel="noopener noreferrer">了解更多</a> 
+            </div>
+            <div class="footer-links">
+                <a href="隐私政策Privacy Policy.pdf" >Privacy
+                    Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </div>
+
+    <script src="taostar-scripts.js"></script>
+
+</body>
+
+</html>
