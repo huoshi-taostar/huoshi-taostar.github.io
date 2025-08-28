@@ -47,6 +47,9 @@ body {
 }
 
 /* Header Styles */
+/* =======================
+   Header 样式
+   ======================= */
 .header {
     position: fixed;
     top: 0;
@@ -69,6 +72,9 @@ body {
     height: 70px;
 }
 
+/* =======================
+   Logo 样式
+   ======================= */
 .logo-container {
     display: flex;
     align-items: center;
@@ -103,6 +109,9 @@ body {
     text-shadow: 0 0 5px rgba(16, 206, 219, 0.521);
 }
 
+/* =======================
+   导航菜单（桌面端）
+   ======================= */
 .main-menu {
     display: flex;
     align-items: center;
@@ -122,8 +131,142 @@ body {
 .menu-item:hover {
     color: rgb(0, 225, 255);
     transform: translateY(-2px);
-
 }
+
+.menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0cbdc4, #02e3df);
+    transition: width 0.3s ease;
+}
+
+.menu-item:hover::after {
+    width: 100%;
+}
+
+.menu-item.active {
+    color: rgba(1, 232, 236, 0.84);
+    text-shadow: 0 0 5px rgba(0, 221, 255, 0.614);
+}
+
+.menu-item.active::after {
+    width: 100%;
+}
+
+.menu-item.external::before {
+    content: '↗';
+    margin-right: 5px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* =======================
+   汉堡菜单按钮（默认隐藏）
+   ======================= */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* 汉堡按钮动画：切换为 X */
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =======================
+   移动端适配
+   ======================= */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 20px;
+    }
+
+    /* 隐藏桌面菜单 */
+    .main-menu {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        /* 默认隐藏到右边 */
+        flex-direction: column;
+        align-items: flex-start;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        width: 240px;
+        height: 100vh;
+        padding: 30px 20px;
+        gap: 25px;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+        transition: right 0.3s ease-in-out;
+        z-index: 1050;
+    }
+
+    /* 点击汉堡按钮后显示 */
+    .main-menu.active {
+        right: 0;
+    }
+
+    /* 汉堡按钮显示 */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* 移动端菜单项 */
+    .menu-item {
+        font-size: 18px;
+        padding: 10px 0;
+        width: 100%;
+        color: rgba(255, 255, 255, 0.85);
+        transition: color 0.3s ease;
+    }
+
+    .menu-item:hover {
+        color: #00e4ff;
+    }
+}
+
+/* =======================
+   超小屏优化
+   ======================= */
+@media screen and (max-width: 400px) {
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .main-menu {
+        width: 200px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+    }
+}
+
 
 .menu-item::after {
     content: '';
