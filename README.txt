@@ -13,6 +13,6 @@ html5up.net | @ajlkn
 
 (* = 示例图未包含在模板中)
 
-火狮桃星 | HUOSHI TAOXING  
+火狮桃星 | HUOSHI TAOSTAR
 
 ---
