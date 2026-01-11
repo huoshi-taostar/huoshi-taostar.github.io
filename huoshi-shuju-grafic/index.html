@@ -1,321 +1,418 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<title>火狮 经济 - 记录</title>
+    <meta charset="UTF-8">
+    <title>火狮 经济 - 记录</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
 
-<style>
-/* ===== 夜晚模式初始样式 ===== */
-body {
-    margin: 0;
-    background-color: #0b0f1a;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #ffffff;
-    transition: all 0.4s ease;
-}
+    <style>
+        /* ===== 夜晚模式初始样式 ===== */
+        body {
+            margin: 0;
+            background-color: #0b0f1a;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            transition: all 0.4s ease;
+        }
 
-h1 {
-    text-align: center;
-    padding: 20px;
-    color: #00e5ff;
-    font-weight: 500;
-    transition: all 0.4s ease;
-}
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #00e5ff;
+            font-weight: 500;
+            transition: all 0.4s ease;
+        }
 
-.container {
-    width: 92%;
-    margin: auto;
-}
+        .container {
+            width: 92%;
+            margin: auto;
+        }
 
-.controls {
-    text-align: center;
-    margin-bottom: 10px;
-}
+        .controls {
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-button {
-    background: transparent;
-    border: 1px solid #00e5ff;
-    color: #00e5ff;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
+        button {
+            background: transparent;
+            border: 1px solid #00e5ff;
+            color: #00e5ff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
 
-canvas {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 14px;
-    padding: 10px;
-    transition: all 0.4s ease;
-}
+        canvas {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            padding: 10px;
+            transition: all 0.4s ease;
+        }
 
-.stats {
-    margin-top: 25px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-}
+        .stats {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
 
-.stat-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(0,229,255,0.3);
-    border-radius: 14px;
-    padding: 16px;
-    transition: all 0.4s ease;
-}
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 14px;
+            padding: 16px;
+            transition: all 0.4s ease;
+        }
 
-.stat-title {
-    font-size: 14px;
-    color: #9adfff;
-    margin-bottom: 6px;
-}
+        .stat-title {
+            font-size: 14px;
+            color: #9adfff;
+            margin-bottom: 6px;
+        }
 
-.stat-value {
-    font-size: 22px;
-    color: #00e5ff;
-    font-weight: bold;
-}
+        .stat-value {
+            font-size: 22px;
+            color: #00e5ff;
+            font-weight: bold;
+        }
 
-/* ===== 右上角切换按钮 ===== */
-#themeToggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-}
+        /* ===== 右上角切换按钮 ===== */
+        #themeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
 
-/* ===== 白天模式 ===== */
-body.day {
-    background-color: #f5f5f5;
-    color: #111111;
-}
+        /* ===== 白天模式 ===== */
+        body.day {
+            background-color: #f5f5f5;
+            color: #111111;
+        }
 
-body.day h1 {
-    color: #000000;
-}
+        body.day h1 {
+            color: #000000;
+        }
 
-body.day button {
-    border-color: #171717;
-    color: #000000d7;
-}
+        body.day button {
+            border-color: #171717;
+            color: #000000d7;
+        }
 
-body.day canvas {
-    background: rgba(0, 0, 0, 0.03);
-}
+        body.day canvas {
+            background: rgba(0, 0, 0, 0.03);
+        }
 
-body.day .stat-card {
-    background: rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,119,170,0.3);
-}
+        body.day .stat-card {
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 119, 170, 0.3);
+        }
 
-body.day .stat-title {
-    color: #000000de;
-}
+        body.day .stat-title {
+            color: #000000de;
+        }
 
-body.day .stat-value {
-    color: #000000;
-}
-</style>
+        body.day .stat-value {
+            color: #000000;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>经济 / 存钱记录系统</h1>
+    <h1>经济 / 存钱记录系统</h1>
 
-<!-- 夜晚/白天切换按钮 -->
-<button id="themeToggle">夜晚/白天</button>
+    <!-- 夜晚/白天切换按钮 -->
+    <button id="themeToggle">夜晚/白天</button>
 
-<div class="controls">
-    <button onclick="economyChart.resetZoom()">重置视图</button>
-</div>
-
-<div class="container">
-    <canvas id="economyChart"></canvas>
-
-    <div class="stats">
-        <div class="stat-card"><div class="stat-title">当前金额</div><div class="stat-value" id="currentMoney">0</div></div>
-        <div class="stat-card"><div class="stat-title">历史最高纪录</div><div class="stat-value" id="maxMoney">0</div></div>
-        <div class="stat-card"><div class="stat-title">总共存入</div><div class="stat-value" id="totalUp">0</div></div>
-        <div class="stat-card"><div class="stat-title">总共花出</div><div class="stat-value" id="totalDown">0</div></div>
-        <div class="stat-card"><div class="stat-title">最大单次增加</div><div class="stat-value" id="maxIncrease">0</div></div>
-        <div class="stat-card"><div class="stat-title">最大单次减少</div><div class="stat-value" id="maxDecrease">0</div></div>
-        <div class="stat-card"><div class="stat-title">记录条数</div><div class="stat-value" id="recordCount">0</div></div>
-        <div class="stat-card"><div class="stat-title">当前趋势</div><div class="stat-value" id="trend">平稳</div></div>
-
-        <div class="stat-card"><div class="stat-title">日均变化</div><div class="stat-value" id="avgDaily">0</div></div>
-        <div class="stat-card"><div class="stat-title">月均增长</div><div class="stat-value" id="avgMonthly">0</div></div>
-        <div class="stat-card"><div class="stat-title">最大回撤</div><div class="stat-value" id="maxDrawdown">0</div></div>
-        <div class="stat-card"><div class="stat-title">总增长率</div><div class="stat-value" id="growthRate">0%</div></div>
-        <div class="stat-card"><div class="stat-title">近30天增长率</div><div class="stat-value" id="growth30">0%</div></div>
-        <div class="stat-card"><div class="stat-title">最长连续上涨</div><div class="stat-value" id="maxUpStreak">0</div></div>
-        <div class="stat-card"><div class="stat-title">最长连续下跌</div><div class="stat-value" id="maxDownStreak">0</div></div>
+    <div class="controls">
+        <button onclick="economyChart.resetZoom()">重置视图</button>
     </div>
-</div>
 
-<script>
-// ===== 夜晚/白天切换 =====
-const themeBtn = document.getElementById("themeToggle");
-themeBtn.addEventListener("click", () => {
-    const isDay = document.body.classList.toggle("day");
+    <div class="container">
+        <canvas id="economyChart"></canvas>
 
-    // 动态修改图表颜色
-    economyChart.data.datasets[0].borderColor = isDay ? "#000000" : "#00e5ff";
-    economyChart.data.datasets[0].backgroundColor = isDay ? "rgba(0,0,0,0.1)" : "rgba(0,229,255,0.18)";
-    economyChart.options.plugins.legend.labels.color = isDay ? "#000000" : "#ffffff";
-    economyChart.options.scales.x.ticks.color = isDay ? "#111111" : "#aaaaaa";
-    economyChart.options.scales.x.grid.color = isDay ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.06)";
-    economyChart.options.scales.y.ticks.color = isDay ? "#111111" : "#aaaaaa";
-    economyChart.options.scales.y.grid.color = isDay ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.06)";
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-title">当前金额</div>
+                <div class="stat-value" id="currentMoney">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">历史最高纪录</div>
+                <div class="stat-value" id="maxMoney">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总共存入</div>
+                <div class="stat-value" id="totalUp">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总共花出</div>
+                <div class="stat-value" id="totalDown">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大单次增加</div>
+                <div class="stat-value" id="maxIncrease">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大单次减少</div>
+                <div class="stat-value" id="maxDecrease">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">记录条数</div>
+                <div class="stat-value" id="recordCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">当前趋势</div>
+                <div class="stat-value" id="trend">平稳</div>
+            </div>
 
-    economyChart.update();
-});
+            <div class="stat-card">
+                <div class="stat-title">日均变化</div>
+                <div class="stat-value" id="avgDaily">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">月均增长</div>
+                <div class="stat-value" id="avgMonthly">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大回撤</div>
+                <div class="stat-value" id="maxDrawdown">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总增长率</div>
+                <div class="stat-value" id="growthRate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">近30天增长率</div>
+                <div class="stat-value" id="growth30">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最长连续上涨</div>
+                <div class="stat-value" id="maxUpStreak">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最长连续下跌</div>
+                <div class="stat-value" id="maxDownStreak">0</div>
+            </div>
 
 
-// ===== 原始数据与统计逻辑 =====
-const economyData = [
-    { date: "2025-01-01", number: 200 },
-    { date: "2025-05-01", number: 1305 },
-    { date: "2025-05-05", number: 1280 },
-    { date: "2025-05-09", number: 1260 },
-    { date: "2025-05-13", number: 1340 },
-    { date: "2025-05-17", number: 1260 },
-    { date: "2025-05-21", number: 1290 },
-    { date: "2025-05-25", number: 1270 },
-    { date: "2025-05-29", number: 1320 },
-    { date: "2025-06-02", number: 1370 },
-    { date: "2025-06-06", number: 1395 },
-    { date: "2025-06-10", number: 1445 },
-    { date: "2025-06-14", number: 1485 },
-    { date: "2025-06-18", number: 1535 },
-    { date: "2025-06-22", number: 1590 },
-    { date: "2025-06-26", number: 1585 },
-    { date: "2025-07-01", number: 1655 },
-    { date: "2025-07-08", number: 1675 },
-    { date: "2025-07-15", number: 1770 },
-    { date: "2025-07-22", number: 2225 },
-    { date: "2025-07-26", number: 3000 },
-    { date: "2025-08-02", number: 3040 },
-    { date: "2025-10-01", number: 3400 },
-    { date: "2025-11-01", number: 3560 },
-    { date: "2025-12-01", number: 3400 },
-    { date: "2025-12-14", number: 3150 },
-    { date: "2026-01-10", number: 3270 },
-    { date: "2026-01-11", number: 3290 }
-];
+            <!-- 新增：欧元人民币汇率 -->
+            <div class="stat-card">
+                <div class="stat-title">欧元 / 人民币</div>
+                <div class="stat-value" id="eurCnyRate">加载中...</div>
+            </div>
 
-function updateStats() {
-    const values = economyData.map(i => i.number);
-    const dates = economyData.map(i => new Date(i.date));
+            <div class="stat-card">
+                <div class="stat-title">总兑换人民币</div>
+                <div class="stat-value" id="totalCNY">加载中...</div>
+            </div>
 
-    let totalUp = 0, totalDown = 0, maxIncrease = 0, maxDecrease = 0;
-    let upStreak = 0, downStreak = 0, maxUp = 0, maxDown = 0;
-    let peak = values[0], maxDrawdown = 0;
 
-    for (let i = 1; i < values.length; i++) {
-        const diff = values[i] - values[i - 1];
-        if (diff > 0) {
-            totalUp += diff;
-            maxIncrease = Math.max(maxIncrease, diff);
-            upStreak++; downStreak = 0;
-        } else {
-            totalDown += Math.abs(diff);
-            maxDecrease = Math.max(maxDecrease, Math.abs(diff));
-            downStreak++; upStreak = 0;
-        }
-        maxUp = Math.max(maxUp, upStreak);
-        maxDown = Math.max(maxDown, downStreak);
-        peak = Math.max(peak, values[i]);
-        maxDrawdown = Math.max(maxDrawdown, peak - values[i]);
-    }
 
-    const days = (dates.at(-1) - dates[0]) / 86400000;
-    const avgDaily = (values.at(-1) - values[0]) / days;
-    const avgMonthly = avgDaily * 30;
-    const growthRate = ((values.at(-1) - values[0]) / values[0] * 100).toFixed(2);
+        </div>
+    </div>
 
-    const now = dates.at(-1);
-    const past30 = economyData.find(i => (now - new Date(i.date)) / 86400000 <= 30);
-    const growth30 = past30
-        ? (((values.at(-1) - past30.number) / past30.number) * 100).toFixed(2)
-        : "N/A";
+    <script>
+        // ===== 夜晚/白天切换 =====
+        const themeBtn = document.getElementById("themeToggle");
+        themeBtn.addEventListener("click", () => {
+            const isDay = document.body.classList.toggle("day");
 
-    document.getElementById("currentMoney").innerText = values.at(-1);
-    document.getElementById("maxMoney").innerText = Math.max(...values);
-    document.getElementById("totalUp").innerText = totalUp;
-    document.getElementById("totalDown").innerText = totalDown;
-    document.getElementById("maxIncrease").innerText = maxIncrease;
-    document.getElementById("maxDecrease").innerText = maxDecrease;
-    document.getElementById("recordCount").innerText = values.length;
-    document.getElementById("avgDaily").innerText = avgDaily.toFixed(2);
-    document.getElementById("avgMonthly").innerText = avgMonthly.toFixed(0);
-    document.getElementById("maxDrawdown").innerText = "-" + maxDrawdown;
-    document.getElementById("growthRate").innerText = growthRate + "%";
-    document.getElementById("growth30").innerText = growth30 + "%";
-    document.getElementById("maxUpStreak").innerText = maxUp;
-    document.getElementById("maxDownStreak").innerText = maxDown;
+            // 动态修改图表颜色
+            economyChart.data.datasets[0].borderColor = isDay ? "#000000" : "#00e5ff";
+            economyChart.data.datasets[0].backgroundColor = isDay ? "rgba(0,0,0,0.1)" : "rgba(0,229,255,0.18)";
+            economyChart.options.plugins.legend.labels.color = isDay ? "#000000" : "#ffffff";
+            economyChart.options.scales.x.ticks.color = isDay ? "#111111" : "#aaaaaa";
+            economyChart.options.scales.x.grid.color = isDay ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.06)";
+            economyChart.options.scales.y.ticks.color = isDay ? "#111111" : "#aaaaaa";
+            economyChart.options.scales.y.grid.color = isDay ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.06)";
 
-    const lastDiff = values.at(-1) - values.at(-2);
-    document.getElementById("trend").innerText =
-        lastDiff > 0 ? "上涨" : lastDiff < 0 ? "下跌" : "平稳";
-}
+            economyChart.update();
+        });
 
-updateStats();
 
-// ===== 图表保持不变 =====
-const ctx = document.getElementById("economyChart").getContext("2d");
-const economyChart = new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: economyData.map(i => i.date),
-        datasets: [{
-            label: "经济 / 资产变化",
-            data: economyData.map(i => i.number),
-            borderColor: "#00e5ff",
-            backgroundColor: "rgba(0,229,255,0.18)",
-            fill: true,
-            tension: 0.25,
-            pointRadius: 5,
-            pointHoverRadius: 8,
-            pointBackgroundColor: "#ffffff"
-        }]
-    },
-    options: {
-        responsive: true,
-        interaction: { mode: "index", intersect: false },
-        plugins: {
-            legend: { labels: { color: "#ffffff" } },
-            zoom: {
-                pan: { enabled: true, mode: "xy" },
-                zoom: {
-                    wheel: { enabled: true, modifierKey: "ctrl" },
-                    pinch: { enabled: true },
-                    mode: "xy"
+        // ===== 原始数据与统计逻辑 =====
+        const economyData = [
+            { date: "2025-01-01", number: 200 },
+            { date: "2025-05-01", number: 1305 },
+            { date: "2025-05-05", number: 1280 },
+            { date: "2025-05-09", number: 1260 },
+            { date: "2025-05-13", number: 1340 },
+            { date: "2025-05-17", number: 1260 },
+            { date: "2025-05-21", number: 1290 },
+            { date: "2025-05-25", number: 1270 },
+            { date: "2025-05-29", number: 1320 },
+            { date: "2025-06-02", number: 1370 },
+            { date: "2025-06-06", number: 1395 },
+            { date: "2025-06-10", number: 1445 },
+            { date: "2025-06-14", number: 1485 },
+            { date: "2025-06-18", number: 1535 },
+            { date: "2025-06-22", number: 1590 },
+            { date: "2025-06-26", number: 1585 },
+            { date: "2025-07-01", number: 1655 },
+            { date: "2025-07-08", number: 1675 },
+            { date: "2025-07-15", number: 1770 },
+            { date: "2025-07-22", number: 2225 },
+            { date: "2025-07-26", number: 3000 },
+            { date: "2025-08-02", number: 3040 },
+            { date: "2025-10-01", number: 3400 },
+            { date: "2025-11-01", number: 3560 },
+            { date: "2025-12-01", number: 3400 },
+            { date: "2025-12-14", number: 3150 },
+            { date: "2026-01-10", number: 3270 },
+            { date: "2026-01-11", number: 3290 }
+        ];
+
+        function updateStats() {
+            const values = economyData.map(i => i.number);
+            const dates = economyData.map(i => new Date(i.date));
+
+            let totalUp = 0, totalDown = 0, maxIncrease = 0, maxDecrease = 0;
+            let upStreak = 0, downStreak = 0, maxUp = 0, maxDown = 0;
+            let peak = values[0], maxDrawdown = 0;
+
+            for (let i = 1; i < values.length; i++) {
+                const diff = values[i] - values[i - 1];
+                if (diff > 0) {
+                    totalUp += diff;
+                    maxIncrease = Math.max(maxIncrease, diff);
+                    upStreak++; downStreak = 0;
+                } else {
+                    totalDown += Math.abs(diff);
+                    maxDecrease = Math.max(maxDecrease, Math.abs(diff));
+                    downStreak++; upStreak = 0;
                 }
+                maxUp = Math.max(maxUp, upStreak);
+                maxDown = Math.max(maxDown, downStreak);
+                peak = Math.max(peak, values[i]);
+                maxDrawdown = Math.max(maxDrawdown, peak - values[i]);
+            }
+
+            const days = (dates.at(-1) - dates[0]) / 86400000;
+            const avgDaily = (values.at(-1) - values[0]) / days;
+            const avgMonthly = avgDaily * 30;
+            const growthRate = ((values.at(-1) - values[0]) / values[0] * 100).toFixed(2);
+
+            const now = dates.at(-1);
+            const past30 = economyData.find(i => (now - new Date(i.date)) / 86400000 <= 30);
+            const growth30 = past30
+                ? (((values.at(-1) - past30.number) / past30.number) * 100).toFixed(2)
+                : "N/A";
+
+            document.getElementById("currentMoney").innerText = values.at(-1);
+            document.getElementById("maxMoney").innerText = Math.max(...values);
+            document.getElementById("totalUp").innerText = totalUp;
+            document.getElementById("totalDown").innerText = totalDown;
+            document.getElementById("maxIncrease").innerText = maxIncrease;
+            document.getElementById("maxDecrease").innerText = maxDecrease;
+            document.getElementById("recordCount").innerText = values.length;
+            document.getElementById("avgDaily").innerText = avgDaily.toFixed(2);
+            document.getElementById("avgMonthly").innerText = avgMonthly.toFixed(0);
+            document.getElementById("maxDrawdown").innerText = "-" + maxDrawdown;
+            document.getElementById("growthRate").innerText = growthRate + "%";
+            document.getElementById("growth30").innerText = growth30 + "%";
+            document.getElementById("maxUpStreak").innerText = maxUp;
+            document.getElementById("maxDownStreak").innerText = maxDown;
+
+            const lastDiff = values.at(-1) - values.at(-2);
+            document.getElementById("trend").innerText =
+                lastDiff > 0 ? "上涨" : lastDiff < 0 ? "下跌" : "平稳";
+        }
+
+        updateStats();
+
+        // ===== 图表保持不变 =====
+        const ctx = document.getElementById("economyChart").getContext("2d");
+        const economyChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: economyData.map(i => i.date),
+                datasets: [{
+                    label: "经济 / 资产变化",
+                    data: economyData.map(i => i.number),
+                    borderColor: "#00e5ff",
+                    backgroundColor: "rgba(0,229,255,0.18)",
+                    fill: true,
+                    tension: 0.25,
+                    pointRadius: 5,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: "#ffffff"
+                }]
             },
-            tooltip: {
-                callbacks: {
-                    label(context) {
-                        const i = context.dataIndex;
-                        if (i === 0) return `金额: ${context.raw}`;
-                        const prev = economyData[i - 1].number;
-                        const diff = context.raw - prev;
-                        const percent = ((diff / prev) * 100).toFixed(2);
-                        return `金额: ${context.raw} (${diff >= 0 ? "+" : ""}${diff}, ${percent}%)`;
+            options: {
+                responsive: true,
+                interaction: { mode: "index", intersect: false },
+                plugins: {
+                    legend: { labels: { color: "#ffffff" } },
+                    zoom: {
+                        pan: { enabled: true, mode: "xy" },
+                        zoom: {
+                            wheel: { enabled: true, modifierKey: "ctrl" },
+                            pinch: { enabled: true },
+                            mode: "xy"
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label(context) {
+                                const i = context.dataIndex;
+                                if (i === 0) return `金额: ${context.raw}`;
+                                const prev = economyData[i - 1].number;
+                                const diff = context.raw - prev;
+                                const percent = ((diff / prev) * 100).toFixed(2);
+                                return `金额: ${context.raw} (${diff >= 0 ? "+" : ""}${diff}, ${percent}%)`;
+                            }
+                        }
                     }
+                },
+                scales: {
+                    x: { ticks: { color: "#aaaaaa" }, grid: { color: "rgba(255,255,255,0.06)" } },
+                    y: { ticks: { color: "#aaaaaa" }, grid: { color: "rgba(255,255,255,0.06)" } }
                 }
             }
-        },
-        scales: {
-            x: { ticks: { color: "#aaaaaa" }, grid: { color: "rgba(255,255,255,0.06)" } },
-            y: { ticks: { color: "#aaaaaa" }, grid: { color: "rgba(255,255,255,0.06)" } }
+        });
+
+        
+
+        // ===== 获取欧元人民币汇率（使用 Frankfurter API） =====
+async function fetchEURCNY() {
+    try {
+        const res = await fetch("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=CNY");
+        const data = await res.json();
+
+        const rate = data.rates.CNY ? parseFloat(data.rates.CNY) : null;
+
+        if (rate) {
+            // 更新欧元汇率显示
+            document.getElementById("eurCnyRate").innerText = rate.toFixed(4);
+
+            // 计算总兑换人民币
+            const currentEuro = economyData.at(-1).number;
+            const totalCNY = (currentEuro * rate).toFixed(2);
+            document.getElementById("totalCNY").innerText = totalCNY + " ¥";
+        } else {
+            document.getElementById("eurCnyRate").innerText = "无数据";
+            document.getElementById("totalCNY").innerText = "无数据";
         }
+    } catch (e) {
+        document.getElementById("eurCnyRate").innerText = "获取失败";
+        document.getElementById("totalCNY").innerText = "获取失败";
+        console.error("EUR/CNY 获取失败", e);
     }
-});
-</script>
+}
+
+// 初始化并每小时更新一次
+fetchEURCNY();
+setInterval(fetchEURCNY, 3600000);
+
+
+    </script>
 
 </body>
+
 </html>
