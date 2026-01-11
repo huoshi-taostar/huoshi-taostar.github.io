@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>火狮 经济 - 记录</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1"></script>
+    <link rel="stylesheet" href="css-script/style.css">
+    <link rel="icon" type="image/x-icon" href="images/ico.png">
+</head>
+
+<body>
+
+    <h1>经济 / 记录系统</h1>
+
+    <!-- 夜晚/白天切换按钮 -->
+    <button id="themeToggle">夜晚/白天</button>
+
+    <div class="controls">
+        <button onclick="economyChart.resetZoom()">重置视图</button>
+    </div>
+
+    <div class="container">
+        <canvas id="economyChart"></canvas>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-title">当前金额</div>
+                <div class="stat-value" id="currentMoney">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">历史最高纪录</div>
+                <div class="stat-value" id="maxMoney">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总共存入</div>
+                <div class="stat-value" id="totalUp">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总共花出</div>
+                <div class="stat-value" id="totalDown">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大单次增加</div>
+                <div class="stat-value" id="maxIncrease">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大单次减少</div>
+                <div class="stat-value" id="maxDecrease">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">记录条数</div>
+                <div class="stat-value" id="recordCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">当前趋势</div>
+                <div class="stat-value" id="trend">平稳</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">日均变化</div>
+                <div class="stat-value" id="avgDaily">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">月均增长</div>
+                <div class="stat-value" id="avgMonthly">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最大回撤</div>
+                <div class="stat-value" id="maxDrawdown">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">总增长率</div>
+                <div class="stat-value" id="growthRate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">近30天增长率</div>
+                <div class="stat-value" id="growth30">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最长连续上涨</div>
+                <div class="stat-value" id="maxUpStreak">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-title">最长连续下跌</div>
+                <div class="stat-value" id="maxDownStreak">0</div>
+            </div>
+
+
+            <!-- 新增：欧元人民币汇率 -->
+            <div class="stat-card">
+                <div class="stat-title">欧元 / 人民币</div>
+                <div class="stat-value" id="eurCnyRate">加载中...</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-title">总兑换人民币</div>
+                <div class="stat-value" id="totalCNY">加载中...</div>
+            </div>
+
+
+
+        </div>
+
+        <pre>
+
+
+
+
+<center>
+            <p> huoshi taostar - copyright 2026</p>
+        </center>
+        </pre>
+    </div>
+
+    <script src="css-script/script.js"></script>
+
+</body>
+
+</html>
