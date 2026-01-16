@@ -47,7 +47,8 @@
             { date: "2025-12-14", number: 3150 },
             { date: "2026-01-10", number: 3270 },
             { date: "2026-01-11", number: 3290 },
-            { date: "2026-01-13", number: 3310 }
+            { date: "2026-01-13", number: 3310 },
+            { date: "2026-01-15", number: 3320 }
         ];
 
         function updateStats() {
