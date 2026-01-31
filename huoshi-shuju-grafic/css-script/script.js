@@ -50,7 +50,7 @@
             { date: "2026-01-13", number: 3310 },
             { date: "2026-01-15", number: 3320 },       
             { date: "2026-01-26", number: 3310 },
-            { date: "2026-01-27", number: 2660 }
+            { date: "2026-01-27", number: 3660 }
         ];
 
         function updateStats() {
@@ -194,6 +194,7 @@ async function fetchEURCNY() {
 // 初始化并每小时更新一次
 fetchEURCNY();
 setInterval(fetchEURCNY, 3600000);
+
 
 
 
